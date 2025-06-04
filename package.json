@@ -9,9 +9,7 @@
     "lint": "next lint",
     "seed": "node scripts/seed.js",
     "health-check": "node scripts/health-check.js",
-    "test-encoding": "node scripts/test-encoding.js",
-    "create-entity": "node scripts/create-entity.js",
-    "generate": "node scripts/create-entity.js"
+    "test-encoding": "node scripts/test-encoding.js"
   },
   "dependencies": {
     "next": "^15.0.0",

@@ -20,8 +20,6 @@
 - ✅ **Responsive Design** - Thân thiện trên cả desktop và mobile
 - ✅ **Server Actions** - Tương tác MongoDB mà không cần API routes
 - ✅ **Real-time Updates** - Cập nhật dữ liệu ngay lập tức
-- ✅ **Entity Generator** - Tự động tạo CRUD boilerplate
-- ✅ **Template System** - Templates cho Model, Actions, Components, Pages
 
 ## 🛠️ Cài đặt
 
@@ -130,15 +128,7 @@ OnlyNextjsUtil/
 ├── types/               # TypeScript definitions
 │   └── next-auth.d.ts    # NextAuth types
 │
-├── templates/           # Code templates
-│   ├── model-template.ts     # MongoDB model template
-│   ├── action-template.ts    # Server actions template
-│   ├── component-template.tsx # React component template
-│   ├── page-template.tsx     # Next.js page template
-│   └── README.md             # Template documentation
-│
 ├── scripts/             # Utility scripts
-│   ├── create-entity.js  # Entity generator script
 │   ├── seed.js           # Sample data seeding
 │   ├── health-check.js   # System health check
 │   └── test-encoding.js  # URL encoding tests
@@ -149,34 +139,6 @@ OnlyNextjsUtil/
     ├── tailwind.config.js # Tailwind config
     ├── tsconfig.json     # TypeScript config
     └── package.json      # Dependencies
-```
-
-## 🚀 Tạo Entity mới
-
-### Sử dụng Entity Generator (Khuyên dùng)
-
-```bash
-npm run create-entity
-# hoặc
-npm run generate
-```
-
-Nhập tên entity (ví dụ: Task, Project, Product) và script sẽ tự động tạo:
-- MongoDB model với validation
-- Server actions với CRUD operations
-- React components với UI
-- Next.js page với routing
-
-### Manual với Templates
-
-```bash
-# Copy templates
-cp templates/model-template.ts models/YourEntity.ts
-cp templates/action-template.ts actions/yourEntity.ts
-cp templates/component-template.tsx components/YourEntityCard.tsx
-cp templates/page-template.tsx app/dashboard/your-entities/page.tsx
-
-# Find & replace EntityName với tên entity của bạn
 ```
 
 ## 🔐 Authentication Flow
@@ -236,9 +198,6 @@ npm run dev
 # Build for production
 npm run build
 
-# Entity generation
-npm run create-entity
-
 # Database utilities
 npm run seed
 npm run health-check
@@ -246,9 +205,6 @@ npm run health-check
 
 ## 📚 Documentation
 
-- [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) - Hướng dẫn tích hợp chức năng mới
-- [QUICK_START.md](./QUICK_START.md) - Hướng dẫn nhanh 5 phút
-- [templates/README.md](./templates/README.md) - Template documentation
 - [SETUP.md](./SETUP.md) - Hướng dẫn setup chi tiết
 
 ## 🤝 Contributing
