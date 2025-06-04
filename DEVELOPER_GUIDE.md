@@ -1,10 +1,10 @@
 # Developer Integration Guide
 
-Hướng dẫn chi tiết để tích hợp chức năng mới vào OnlyNextjs Util - Dự án Zen To Done utility framework.
+Hướng dẫn chi tiết để tích hợp chức năng mới vào OnlyNextjs Util - Framework utility đa mục đích.
 
 ## 📖 Tổng quan
 
-OnlyNextjs Util là một framework utility được xây dựng trên Next.js 15 với mục tiêu tạo ra một nền tảng dễ mở rộng cho các ứng dụng quản lý cuộc sống theo phương pháp Zen To Done. Dự án sử dụng kiến trúc Server Actions và direct database interaction để đảm bảo hiệu suất cao.
+OnlyNextjs Util là một framework utility được xây dựng trên Next.js 15 với mục tiêu tạo ra một nền tảng dễ mở rộng cho các ứng dụng web hiện đại. Dự án sử dụng kiến trúc Server Actions và direct database interaction để đảm bảo hiệu suất cao.
 
 ## 🏗️ Kiến trúc hệ thống
 
@@ -420,32 +420,32 @@ const navigation = [
 
 ## 🎨 Styling Guidelines
 
-### Tuân theo Design System Zen
+### Tuân theo Design System
 
-Dự án này được thiết kế theo triết lý Zen To Done, tập trung vào sự đơn giản và tối giản:
+Dự án này được thiết kế với nguyên tắc tối giản và dễ sử dụng:
 
 ```css
 /* Sử dụng màu sắc nhẹ nhàng */
-.zen-primary { @apply bg-blue-50 text-blue-700; }
-.zen-secondary { @apply bg-gray-50 text-gray-700; }
-.zen-accent { @apply bg-green-50 text-green-700; }
+.primary { @apply bg-blue-50 text-blue-700; }
+.secondary { @apply bg-gray-50 text-gray-700; }
+.accent { @apply bg-green-50 text-green-700; }
 
 /* Typography tối giản */
-.zen-heading { @apply text-gray-900 font-medium; }
-.zen-body { @apply text-gray-600 leading-relaxed; }
+.heading { @apply text-gray-900 font-medium; }
+.body { @apply text-gray-600 leading-relaxed; }
 
 /* Spacing hào phóng */
-.zen-spacing { @apply p-6 space-y-4; }
-.zen-container { @apply max-w-4xl mx-auto; }
+.spacing { @apply p-6 space-y-4; }
+.container { @apply max-w-4xl mx-auto; }
 ```
 
 ### Sử dụng Component Patterns
 
 ```typescript
 // Pattern cho forms
-export function ZenForm({ children, onSubmit }: ZenFormProps) {
+export function AppForm({ children, onSubmit }: AppFormProps) {
   return (
-    <form onSubmit={onSubmit} className="zen-spacing">
+    <form onSubmit={onSubmit} className="spacing">
       <div className="space-y-4">
         {children}
       </div>
@@ -454,15 +454,15 @@ export function ZenForm({ children, onSubmit }: ZenFormProps) {
 }
 
 // Pattern cho cards
-export function ZenCard({ children, title }: ZenCardProps) {
+export function AppCard({ children, title }: AppCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       {title && (
         <div className="px-6 py-4 border-b border-gray-200">
-          <h3 className="zen-heading">{title}</h3>
+          <h3 className="heading">{title}</h3>
         </div>
       )}
-      <div className="zen-spacing">
+      <div className="spacing">
         {children}
       </div>
     </div>
@@ -842,7 +842,7 @@ module.exports = nextConfig;
 
 ## 📚 Best Practices Summary
 
-1. **Zen Philosophy**: Giữ mọi thứ đơn giản, tối giản và tập trung
+1. **Simplicity**: Giữ mọi thứ đơn giản và dễ hiểu
 2. **Type Safety**: Sử dụng TypeScript nghiêm ngặt
 3. **Performance**: Tối ưu database queries và client-side rendering
 4. **Security**: Luôn validate input và kiểm tra authorization

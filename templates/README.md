@@ -110,7 +110,7 @@ Template cho Next.js pages:
 - Include proper error messages
 
 ### Components
-- Follow Zen design principles
+- Follow design principles của dự án
 - Sử dụng consistent spacing và colors
 - Include loading và error states
 - Make responsive với Tailwind

@@ -1,6 +1,6 @@
 # OnlyNextjs Util
 
-Ứng dụng quản lý user hiện đại được xây dựng với Next.js 15, NextAuth và MongoDB. Tương tác trực tiếp với database mà không cần API trung gian.
+Ứng dụng utility framework hiện đại được xây dựng với Next.js 15, NextAuth và MongoDB. Tương tác trực tiếp với database mà không cần API trung gian.
 
 ## 🚀 Công nghệ sử dụng
 
@@ -20,6 +20,8 @@
 - ✅ **Responsive Design** - Thân thiện trên cả desktop và mobile
 - ✅ **Server Actions** - Tương tác MongoDB mà không cần API routes
 - ✅ **Real-time Updates** - Cập nhật dữ liệu ngay lập tức
+- ✅ **Entity Generator** - Tự động tạo CRUD boilerplate
+- ✅ **Template System** - Templates cho Model, Actions, Components, Pages
 
 ## 🛠️ Cài đặt
 
@@ -128,7 +130,15 @@ OnlyNextjsUtil/
 ├── types/               # TypeScript definitions
 │   └── next-auth.d.ts    # NextAuth types
 │
-├── scripts/             # Database scripts
+├── templates/           # Code templates
+│   ├── model-template.ts     # MongoDB model template
+│   ├── action-template.ts    # Server actions template
+│   ├── component-template.tsx # React component template
+│   ├── page-template.tsx     # Next.js page template
+│   └── README.md             # Template documentation
+│
+├── scripts/             # Utility scripts
+│   ├── create-entity.js  # Entity generator script
 │   ├── seed.js           # Sample data seeding
 │   ├── health-check.js   # System health check
 │   └── test-encoding.js  # URL encoding tests
@@ -139,6 +149,34 @@ OnlyNextjsUtil/
     ├── tailwind.config.js # Tailwind config
     ├── tsconfig.json     # TypeScript config
     └── package.json      # Dependencies
+```
+
+## 🚀 Tạo Entity mới
+
+### Sử dụng Entity Generator (Khuyên dùng)
+
+```bash
+npm run create-entity
+# hoặc
+npm run generate
+```
+
+Nhập tên entity (ví dụ: Task, Project, Product) và script sẽ tự động tạo:
+- MongoDB model với validation
+- Server actions với CRUD operations
+- React components với UI
+- Next.js page với routing
+
+### Manual với Templates
+
+```bash
+# Copy templates
+cp templates/model-template.ts models/YourEntity.ts
+cp templates/action-template.ts actions/yourEntity.ts
+cp templates/component-template.tsx components/YourEntityCard.tsx
+cp templates/page-template.tsx app/dashboard/your-entities/page.tsx
+
+# Find & replace EntityName với tên entity của bạn
 ```
 
 ## 🔐 Authentication Flow
@@ -198,119 +236,37 @@ npm run dev
 # Build for production
 npm run build
 
-# Start production server
-npm run start
+# Entity generation
+npm run create-entity
 
-# Lint code
-npm run lint
-
-# Seed sample users
+# Database utilities
 npm run seed
-
-# Health check
 npm run health-check
-
-# Test URL encoding
-npm run test-encoding
 ```
-
-## 👥 Sample Accounts
-
-Sau khi chạy `npm run seed`, bạn có thể sử dụng các tài khoản mẫu:
-
-- **admin@example.com** / 123456
-- **user@example.com** / 123456  
-- **demo@example.com** / 123456
-
-## 🔧 Customization
-
-### Thêm Model mới
-
-1. Tạo file trong `models/`
-2. Định nghĩa schema với Mongoose
-3. Tạo Server Actions trong `actions/`
-4. Tạo UI components và pages
-
-### Thêm Authentication Provider
-
-1. Cập nhật `lib/auth.ts`
-2. Thêm provider configuration
-3. Cập nhật UI login/register
-
-### Styling
-
-- Sử dụng Tailwind CSS classes
-- Customize `tailwind.config.js`
-- Global styles trong `app/globals.css`
-
-## 🎯 Testing
-
-### Manual Testing
-1. Đăng ký tài khoản mới
-2. Đăng nhập với tài khoản
-3. Xem Dashboard
-4. Vào My Profile
-5. Chỉnh sửa thông tin
-6. Đổi mật khẩu
-7. Test responsive design
-
-### Automated Testing
-```bash
-# Health check
-npm run health-check
-
-# URL encoding test
-npm run test-encoding
-```
-
-## 🐛 Troubleshooting
-
-### MongoDB Connection Issues
-- Kiểm tra `MONGODB_URI` trong `.env.local`
-- Đảm bảo MongoDB server đang chạy
-- Check network connectivity với MongoDB Atlas
-
-### NextAuth Issues
-- Verify `NEXTAUTH_SECRET` và `NEXTAUTH_URL`
-- Clear browser cookies và localStorage
-- Check server logs for detailed errors
-
-### URL Encoding Issues
-- Run `npm run test-encoding` để test
-- Check `utils/string.ts` for encoding functions
-- Verify Vietnamese characters in URLs
-
-### Build Issues
-- Run `npm run lint` để check lỗi code
-- Ensure tất cả dependencies được install
-- Check TypeScript types
 
 ## 📚 Documentation
 
-- **SETUP.md** - Chi tiết hướng dẫn setup
-- **CHANGELOG.md** - Lịch sử thay đổi
-- **docs/TROUBLESHOOTING.md** - Hướng dẫn fix lỗi
-- **UPDATE_SUMMARY.md** - Tóm tắt update gần nhất
-
-## 📝 License
-
-This project is licensed under the MIT License.
+- [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md) - Hướng dẫn tích hợp chức năng mới
+- [QUICK_START.md](./QUICK_START.md) - Hướng dẫn nhanh 5 phút
+- [templates/README.md](./templates/README.md) - Template documentation
+- [SETUP.md](./SETUP.md) - Hướng dẫn setup chi tiết
 
 ## 🤝 Contributing
 
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. Fork repository
+2. Tạo feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Tạo Pull Request
 
-## 📞 Support
+## 📄 License
 
-Nếu bạn gặp vấn đề hoặc có câu hỏi:
-1. Check [Troubleshooting Guide](docs/TROUBLESHOOTING.md)
-2. Run `npm run health-check` để chẩn đoán
-3. Tạo issue trên GitHub với thông tin chi tiết
+Distributed under the MIT License. See `LICENSE` for more information.
 
----
+## 🙏 Acknowledgments
 
-**Happy Coding! 🚀**
+- [Next.js](https://nextjs.org/) - React framework
+- [NextAuth.js](https://next-auth.js.org/) - Authentication
+- [MongoDB](https://www.mongodb.com/) - Database
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Lucide React](https://lucide.dev/) - Icons
