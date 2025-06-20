@@ -1,59 +1,51 @@
 import { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
+import GoogleProvider from 'next-auth/providers/google';
 import dbConnect from './mongodb';
 import User from '@/models/User';
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: 'credentials',
-      credentials: {
-        email: { label: 'Email', type: 'email' },
-        password: { label: 'Password', type: 'password' }
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null;
-        }
-
-        try {
-          await dbConnect();
-          
-          const user = await User.findOne({ email: credentials.email });
-          
-          if (!user) {
-            return null;
-          }
-
-          const isPasswordValid = await bcrypt.compare(
-            credentials.password,
-            user.password
-          );
-
-          if (!isPasswordValid) {
-            return null;
-          }
-
-          return {
-            id: user._id.toString(),
-            email: user.email,
-            name: user.name,
-          };
-        } catch (error) {
-          console.error('Auth error:', error);
-          return null;
-        }
-      }
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     })
   ],
   session: {
     strategy: 'jwt',
   },
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
+    async signIn({ user, account, profile }) {
+      if (account?.provider === 'google') {
+        try {
+          await dbConnect();
+          
+          // Kiểm tra xem user đã tồn tại chưa
+          const existingUser = await User.findOne({ email: user.email });
+          
+          if (!existingUser) {
+            // Tạo user mới nếu chưa tồn tại
+            await User.create({
+              name: user.name || '',
+              email: user.email || '',
+              googleId: account.providerAccountId,
+            });
+          }
+          
+          return true;
+        } catch (error) {
+          console.error('Error during sign in:', error);
+          return false;
+        }
+      }
+      return true;
+    },
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        await dbConnect();
+        const dbUser = await User.findOne({ email: user.email });
+        if (dbUser) {
+          token.id = dbUser._id.toString();
+        }
       }
       return token;
     },

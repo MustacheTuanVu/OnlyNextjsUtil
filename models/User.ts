@@ -3,7 +3,8 @@ import mongoose, { Document, Schema } from 'mongoose';
 export interface IUser extends Document {
   name: string;
   email: string;
-  password: string;
+  password?: string; // Optional for Google auth
+  googleId?: string; // Google provider account ID
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,8 +24,14 @@ const UserSchema = new Schema<IUser>({
   },
   password: {
     type: String,
-    required: [true, 'Mật khẩu là bắt buộc'],
+    required: false, // Not required for Google auth
     minlength: [6, 'Mật khẩu phải có ít nhất 6 ký tự'],
+  },
+  googleId: {
+    type: String,
+    required: false,
+    unique: true,
+    sparse: true, // Allows multiple null values
   },
 }, {
   timestamps: true,

@@ -121,6 +121,11 @@ export async function updatePassword(formData: FormData) {
       throw new Error('Không tìm thấy người dùng');
     }
 
+    // Kiểm tra nếu user đăng nhập bằng Google (không có password)
+    if (!user.password) {
+      throw new Error('Tài khoản Google không thể đổi mật khẩu. Vui lòng sử dụng Google để quản lý mật khẩu.');
+    }
+
     // Kiểm tra mật khẩu hiện tại
     const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password);
     
@@ -145,5 +150,30 @@ export async function updatePassword(formData: FormData) {
       throw new Error(error.message);
     }
     throw new Error('Không thể cập nhật mật khẩu');
+  }
+}
+
+// Kiểm tra xem user có phải là Google user không
+export async function isGoogleUser() {
+  const session = await getServerSession(authOptions);
+  
+  if (!session?.user?.id) {
+    return false;
+  }
+
+  try {
+    await dbConnect();
+    
+    const user = await User.findById(session.user.id).select('googleId password');
+    
+    if (!user) {
+      return false;
+    }
+
+    // User là Google user nếu có googleId và không có password
+    return !!(user.googleId && !user.password);
+  } catch (error) {
+    console.error('Error checking if Google user:', error);
+    return false;
   }
 }

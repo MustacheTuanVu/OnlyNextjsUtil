@@ -21,7 +21,7 @@ export default async function Home() {
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Ứng dụng quản lý hiện đại được xây dựng với Next.js 15, NextAuth và MongoDB. 
-            Tương tác trực tiếp với database mà không cần API trung gian.
+            Đăng nhập dễ dàng với Google để bắt đầu sử dụng ngay!
           </p>
         </header>
 
@@ -31,7 +31,7 @@ export default async function Home() {
             <Shield className="w-12 h-12 text-blue-600 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Bảo mật cao</h3>
             <p className="text-gray-600">
-              Xác thực an toàn với NextAuth, mã hóa mật khẩu và quản lý session
+              Xác thực an toàn với Google OAuth và NextAuth, bảo vệ thông tin cá nhân
             </p>
           </div>
           
@@ -54,29 +54,18 @@ export default async function Home() {
 
         {/* CTA Buttons */}
         <div className="text-center space-y-4">
-          <div className="space-x-4">
+          <div className="flex justify-center">
             <Link 
               href="/login"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white text-lg rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
             >
-              Đăng nhập
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Link>
-            
-            <Link 
-              href="/register"
-              className="inline-flex items-center px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-            >
-              Đăng ký ngay
-              <ArrowRight className="ml-2 w-4 h-4" />
+              Đăng nhập với Google
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Link>
           </div>
           
           <p className="text-sm text-gray-500">
-            Đã có tài khoản? 
-            <Link href="/login" className="text-blue-600 hover:underline ml-1">
-              Đăng nhập tại đây
-            </Link>
+            Sử dụng tài khoản Google của bạn để đăng nhập nhanh chóng và an toàn
           </p>
         </div>
 
@@ -89,7 +78,7 @@ export default async function Home() {
               <div className="text-sm text-gray-500">App Router</div>
             </div>
             <div className="p-4">
-              <div className="font-semibold">NextAuth</div>
+              <div className="font-semibold">Google OAuth</div>
               <div className="text-sm text-gray-500">Authentication</div>
             </div>
             <div className="p-4">
